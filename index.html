@@ -60,7 +60,7 @@ body{display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif
   -webkit-mask-image:radial-gradient(ellipse 82% 94% at 50% 47%,#000 48%,rgba(0,0,0,.9) 66%,transparent 100%);
   mask-image:radial-gradient(ellipse 82% 94% at 50% 47%,#000 48%,rgba(0,0,0,.9) 66%,transparent 100%);
   transform:translate3d(calc(var(--px,0) * 3px),0,0) scale(1.02);
-  animation:partyIn 2.2s ease-out both,partyDrift 8s 2.2s ease-in-out infinite alternate;
+  animation:partyIn 2.2s ease-out both;
 }
 
 /* Two animated cloud plates move at different speeds so the moon repeatedly disappears/reappears. */
@@ -288,7 +288,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
 @keyframes cloudFar{from{transform:translateX(-1.8%) scale(1.03)}to{transform:translateX(2.2%) scale(1.06)}}
 @keyframes cloudNear{0%{transform:translateX(2%) scale(1.06)}55%{transform:translateX(-3.3%) scale(1.09)}100%{transform:translateX(1.4%) scale(1.06)}}
 @keyframes partyIn{from{opacity:0;filter:blur(8px) saturate(.4) brightness(.65)}to{opacity:var(--party-opacity)}}
-@keyframes partyDrift{from{margin-left:-2.4%}to{margin-left:2.4%}}
 @keyframes sceneDrift{from{scale:1.005}to{scale:1.018}}
 @keyframes lightBreath{from{opacity:.84}to{opacity:1}}
 @keyframes mist{from{transform:translateX(-2%)}to{transform:translateX(2.5%)}}
