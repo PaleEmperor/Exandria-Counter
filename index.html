@@ -11,6 +11,7 @@
   --grade-contrast: 1.08;
   --cloud-opacity: .82;
   --bloom: 1;
+  --party-opacity: .24;
   --motion: 1;
   --title-cream: #eee2c8;
   --accent: #d44a38;
@@ -43,6 +44,23 @@ body{display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif
   transform:translate(calc((var(--px,0) * -7px)),calc((var(--py,0) * -4px))) scale(1.02);
   transition:filter .7s ease;
   animation:sceneDrift 18s ease-in-out infinite alternate;
+}
+
+/* The adventuring party appears as a vast, half-remembered vision in the clouds. */
+#party{
+  position:absolute;
+  left:-4%;top:8%;
+  width:108%;height:auto;
+  opacity:var(--party-opacity);
+  object-fit:contain;
+  filter:saturate(.62) brightness(.82) contrast(1.12) sepia(.18)
+    drop-shadow(0 0 12px rgba(255,82,46,.32))
+    drop-shadow(0 0 30px rgba(124,58,112,.28));
+  mix-blend-mode:screen;
+  -webkit-mask-image:radial-gradient(ellipse 68% 78% at 50% 47%,#000 34%,rgba(0,0,0,.78) 55%,transparent 100%);
+  mask-image:radial-gradient(ellipse 68% 78% at 50% 47%,#000 34%,rgba(0,0,0,.78) 55%,transparent 100%);
+  transform:translate3d(calc(var(--px,0) * 3px),calc(var(--py,0) * 1.5px),0) scale(1.02);
+  animation:partyIn 3.2s ease-out both,partyDrift 16s 3.2s ease-in-out infinite alternate;
 }
 
 /* Two animated cloud plates move at different speeds so the moon repeatedly disappears/reappears. */
@@ -263,6 +281,8 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
 
 @keyframes cloudFar{from{transform:translateX(-1.8%) scale(1.03)}to{transform:translateX(2.2%) scale(1.06)}}
 @keyframes cloudNear{0%{transform:translateX(2%) scale(1.06)}55%{transform:translateX(-3.3%) scale(1.09)}100%{transform:translateX(1.4%) scale(1.06)}}
+@keyframes partyIn{from{opacity:0;filter:blur(8px) saturate(.4) brightness(.65)}to{opacity:var(--party-opacity)}}
+@keyframes partyDrift{from{margin-left:-1%;opacity:calc(var(--party-opacity) * .72)}to{margin-left:1%;opacity:var(--party-opacity)}}
 @keyframes sceneDrift{from{scale:1.005}to{scale:1.018}}
 @keyframes lightBreath{from{opacity:.84}to{opacity:1}}
 @keyframes mist{from{transform:translateX(-2%)}to{transform:translateX(2.5%)}}
@@ -289,6 +309,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
 <div id="frame">
   <img id="scene" class="layer" src="assets/scene.png" alt="">
   <img id="cloudFar" class="cloud-strip" src="assets/clouds_far.svg" alt="">
+  <img id="party" src="assets/party.png" alt="The adventuring party watching over the horizon">
   <img id="cloudNear" class="cloud-strip" src="assets/clouds_near.svg" alt="">
 
   <div id="redWash" class="layer"></div>
