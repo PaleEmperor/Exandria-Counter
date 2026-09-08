@@ -383,9 +383,9 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
       remain.textContent = "– Roll for initiative –";
       return;
     }
-    const memeDay = Math.ceil(diff / DAY) + 1;
-    dayNum.textContent = memeDay;
-    suffix.textContent = ordinal(memeDay);
+    const remainingDay = Math.ceil(diff / DAY);
+    dayNum.textContent = remainingDay;
+    suffix.textContent = ordinal(remainingDay);
 
     const sec = Math.floor(diff/1000);
     const d = Math.floor(sec/86400);
