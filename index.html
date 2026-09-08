@@ -12,7 +12,6 @@
   --cloud-opacity: .82;
   --bloom: 1;
   --party-opacity: .55;
-  --motion: 1;
   --title-cream: #eee2c8;
   --accent: #d44a38;
   --accent2: #ff7a45;
@@ -76,12 +75,12 @@ body{display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif
 }
 #cloudFar{
   top:2%;
-  animation:cloudFar calc(47s / var(--motion)) linear infinite alternate;
+  animation:cloudFar 47s linear infinite alternate;
   opacity:calc(var(--cloud-opacity) * .68);
 }
 #cloudNear{
   top:9%;
-  animation:cloudNear calc(31s / var(--motion)) ease-in-out infinite alternate;
+  animation:cloudNear 31s ease-in-out infinite alternate;
 }
 
 /* Cold moon halo, warm dawn glow, and localized architectural light. */
@@ -350,7 +349,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
     <button data-preset="blood">Blood Moon</button>
     <button data-preset="ember">Ember</button>
     <button data-preset="dream">Dream</button>
-    <button id="motion">Motion</button>
   </div>
 </div>
 
@@ -415,13 +413,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
     b.classList.add("active");
     Object.entries(presets[b.dataset.preset]).forEach(([k,v])=>root.style.setProperty(k,v));
   }));
-
-  let motionOn = true;
-  document.getElementById("motion").addEventListener("click", e => {
-    motionOn = !motionOn;
-    root.style.setProperty("--motion", motionOn ? "1" : "999999");
-    e.currentTarget.classList.toggle("active", !motionOn);
-  });
 
   frame.addEventListener("dblclick", async () => {
     try{
