@@ -9,7 +9,6 @@
   --grade-sat: 1.05;
   --grade-bright: .91;
   --grade-contrast: 1.08;
-  --cloud-opacity: .82;
   --bloom: 1;
   --party-opacity: .55;
   --title-cream: #eee2c8;
@@ -58,29 +57,8 @@ body{display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif
   mix-blend-mode:normal;
   -webkit-mask-image:linear-gradient(to bottom,#000 0 56%,rgba(0,0,0,.82) 70%,rgba(0,0,0,.28) 88%,transparent 100%);
   mask-image:linear-gradient(to bottom,#000 0 56%,rgba(0,0,0,.82) 70%,rgba(0,0,0,.28) 88%,transparent 100%);
-  transform:translate3d(calc(var(--px,0) * 3px),0,0) scale(1.02);
+  transform:scale(1.02);
   animation:partyIn 2.2s ease-out both;
-}
-
-/* Two animated cloud plates move at different speeds so the moon repeatedly disappears/reappears. */
-.cloud-strip{
-  position:absolute;
-  left:-12%;
-  width:124%;
-  height:46%;
-  object-fit:fill;
-  opacity:var(--cloud-opacity);
-  filter:blur(.3px) saturate(.95);
-  mix-blend-mode:multiply;
-}
-#cloudFar{
-  top:2%;
-  animation:cloudFar 47s linear infinite alternate;
-  opacity:calc(var(--cloud-opacity) * .68);
-}
-#cloudNear{
-  top:9%;
-  animation:cloudNear 31s ease-in-out infinite alternate;
 }
 
 /* Cold moon halo, warm dawn glow, and localized architectural light. */
@@ -292,8 +270,6 @@ body{display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif
 #controls button.active{border-color:rgba(242,117,71,.55);color:white}
 canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:8}
 
-@keyframes cloudFar{from{transform:translateX(-1.8%) scale(1.03)}to{transform:translateX(2.2%) scale(1.06)}}
-@keyframes cloudNear{0%{transform:translateX(2%) scale(1.06)}55%{transform:translateX(-3.3%) scale(1.09)}100%{transform:translateX(1.4%) scale(1.06)}}
 @keyframes partyIn{from{opacity:0;filter:blur(8px) saturate(.4) brightness(.65)}to{opacity:var(--party-opacity)}}
 @keyframes sceneDrift{from{scale:1.005}to{scale:1.018}}
 @keyframes lightBreath{from{opacity:.84}to{opacity:1}}
@@ -320,9 +296,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
 <body>
 <div id="frame" data-campaign-start="2026-10-16T19:00:00+02:00">
   <img id="scene" class="layer" src="assets/scene.png" alt="">
-  <img id="cloudFar" class="cloud-strip" src="assets/clouds_far.svg" alt="">
   <img id="party" src="assets/party.png" alt="The adventuring party watching over the horizon">
-  <img id="cloudNear" class="cloud-strip" src="assets/clouds_near.svg" alt="">
 
   <div id="redWash" class="layer"></div>
   <div id="rays" class="layer"></div>
@@ -411,10 +385,10 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
 
   // Style presets.
   const presets = {
-    reference: {"--grade-sat":"1.05","--grade-bright":".91","--grade-contrast":"1.08","--cloud-opacity":".82","--bloom":"1"},
-    blood:     {"--grade-sat":"1.28","--grade-bright":".82","--grade-contrast":"1.17","--cloud-opacity":".91","--bloom":"1.22"},
-    ember:     {"--grade-sat":"1.16","--grade-bright":".98","--grade-contrast":"1.07","--cloud-opacity":".70","--bloom":"1.28"},
-    dream:     {"--grade-sat":".86","--grade-bright":"1.03","--grade-contrast":".94","--cloud-opacity":".60","--bloom":".86"}
+    reference: {"--grade-sat":"1.05","--grade-bright":".91","--grade-contrast":"1.08","--bloom":"1"},
+    blood:     {"--grade-sat":"1.28","--grade-bright":".82","--grade-contrast":"1.17","--bloom":"1.22"},
+    ember:     {"--grade-sat":"1.16","--grade-bright":".98","--grade-contrast":"1.07","--bloom":"1.28"},
+    dream:     {"--grade-sat":".86","--grade-bright":"1.03","--grade-contrast":".94","--bloom":".86"}
   };
   document.querySelectorAll("[data-preset]").forEach(b => b.addEventListener("click", () => {
     document.querySelectorAll("[data-preset]").forEach(x=>x.classList.remove("active"));
