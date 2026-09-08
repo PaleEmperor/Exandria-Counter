@@ -17,8 +17,6 @@
   --gold: #e3a254;
   --panel: rgba(9,6,9,.58);
   --ember: #ff9a48;
-  --mouse-x: 50%;
-  --mouse-y: 50%;
 }
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#08060a;color:white}
@@ -39,7 +37,7 @@ body{display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif
 #scene{
   width:106%;height:106%;left:-3%;top:-3%;object-fit:cover;
   filter:saturate(var(--grade-sat)) brightness(var(--grade-bright)) contrast(var(--grade-contrast));
-  transform:translate(calc((var(--px,0) * -7px)),calc((var(--py,0) * -4px))) scale(1.02);
+  transform:scale(1.02);
   transition:filter .7s ease;
   animation:sceneDrift 18s ease-in-out infinite alternate;
 }
@@ -88,7 +86,7 @@ body{display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif
     radial-gradient(circle at 66% 10%,rgba(184,89,126,calc(.23 * var(--bloom))) 0 5%,rgba(84,41,83,.11) 14%,transparent 28%),
     radial-gradient(circle at 49% 69%,rgba(255,128,38,calc(.56 * var(--bloom))) 0 4%,rgba(249,62,24,.21) 12%,transparent 29%),
     radial-gradient(ellipse at 72% 59%,rgba(255,181,71,calc(.10 * var(--bloom))) 0 7%,transparent 24%),
-    radial-gradient(circle at var(--mouse-x) var(--mouse-y),rgba(255,205,126,.08),transparent 16%);
+    radial-gradient(circle at 50% 52%,rgba(255,205,126,.055),transparent 19%);
   mix-blend-mode:screen;
   animation:lightBreath 5.8s ease-in-out infinite alternate;
 }
@@ -190,7 +188,6 @@ body{display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif
   width:62%;
   text-align:center;
   filter:drop-shadow(0 5px 4px rgba(0,0,0,.78));
-  transform:translate(calc(var(--px,0) * 1.2px),calc(var(--py,0) * .7px));
 }
 .kicker{
   font-weight:800;
@@ -399,17 +396,6 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
   }
   update();
   setInterval(update,250);
-
-  // Mouse parallax + subtle interactive light.
-  frame.addEventListener("pointermove", e => {
-    const r = frame.getBoundingClientRect();
-    const x = (e.clientX-r.left)/r.width;
-    const y = (e.clientY-r.top)/r.height;
-    root.style.setProperty("--px", (x-.5).toFixed(3));
-    root.style.setProperty("--py", (y-.5).toFixed(3));
-    root.style.setProperty("--mouse-x", `${(x*100).toFixed(1)}%`);
-    root.style.setProperty("--mouse-y", `${(y*100).toFixed(1)}%`);
-  });
 
   // Style presets.
   const presets = {
