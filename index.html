@@ -149,6 +149,20 @@ body{display:grid;place-items:center;font-family:Georgia,"Times New Roman",serif
 .eye-left{left:62.3%;top:24%;width:7.2%;aspect-ratio:1}
 .eye-right{left:77.3%;top:16.5%;width:7%;aspect-ratio:1;animation-delay:-1.15s}
 
+/* A soft lantern pulse over the clock tower's rose window preserves its stone tracery. */
+#clockGlow{
+  position:absolute;left:83.55%;top:46%;width:6.35%;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,
+    rgba(255,240,153,.24) 0 24%,
+    rgba(255,195,65,.18) 38%,
+    rgba(255,139,34,.08) 57%,
+    transparent 74%);
+  box-shadow:0 0 10px rgba(255,183,58,.18),0 0 24px rgba(255,116,29,.1);
+  filter:blur(1.4px);
+  mix-blend-mode:screen;
+  animation:clockPulse 4.8s ease-in-out infinite;
+}
+
 /* More localized sources along the town and river. */
 .glow{position:absolute;border-radius:50%;filter:blur(10px);mix-blend-mode:screen;pointer-events:none}
 .g1{left:43%;top:66%;width:10%;height:8%;background:rgba(255,125,37,.22);animation:flicker 3.9s infinite}
@@ -287,6 +301,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
 @keyframes rays{from{opacity:.54;transform:rotate(-1deg) scaleX(.96)}to{opacity:1;transform:rotate(1.2deg) scaleX(1.04)}}
 @keyframes riverShimmer{from{opacity:.48;transform:translateX(-2%) scaleX(.92)}to{opacity:.94;transform:translateX(2%) scaleX(1.08)}}
 @keyframes eyePulse{0%,100%{opacity:.55;transform:scale(.92)}45%{opacity:.96;transform:scale(1.1)}52%{opacity:.66}62%{opacity:.92}}
+@keyframes clockPulse{0%,100%{opacity:.48;transform:scale(.97)}38%{opacity:.78;transform:scale(1.025)}43%{opacity:.61}68%{opacity:.72}}
 @keyframes crestTurn{to{transform:translateX(-50%) rotate(360deg)}}
 @keyframes numberGlow{from{filter:drop-shadow(0 5px 0 #250d0d) drop-shadow(0 0 8px rgba(0,0,0,.8)) drop-shadow(0 0 8px rgba(255,70,43,.16))}to{filter:drop-shadow(0 5px 0 #250d0d) drop-shadow(0 0 8px rgba(0,0,0,.8)) drop-shadow(0 0 21px rgba(255,82,43,.42))}}
 @keyframes flicker{0%,100%{opacity:.62;transform:scale(1)}20%{opacity:.93}24%{opacity:.55}48%{opacity:.78}77%{opacity:.51;transform:scale(1.06)}}
@@ -315,6 +330,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
   <div id="lighting" class="layer"></div>
   <div id="mist" class="layer"></div>
   <div class="eye eye-left"></div><div class="eye eye-right"></div>
+  <div id="clockGlow"></div>
   <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div><div class="glow g4"></div>
   <div id="shade" class="layer"></div>
 
