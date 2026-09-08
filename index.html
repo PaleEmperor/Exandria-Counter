@@ -306,7 +306,7 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
 </style>
 </head>
 <body>
-<div id="frame">
+<div id="frame" data-campaign-start="2026-10-16T00:00:00+03:00">
   <img id="scene" class="layer" src="assets/scene.png" alt="">
   <img id="cloudFar" class="cloud-strip" src="assets/clouds_far.svg" alt="">
   <img id="party" src="assets/party.png" alt="The adventuring party watching over the horizon">
@@ -326,11 +326,11 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
   <div id="title">
     <div class="kicker">DAWN OF THE</div>
     <div class="dayline">
-      <span class="number" id="dayNum">39</span>
-      <span class="suffix" id="suffix">th</span>
+      <span class="number" id="dayNum">--</span>
+      <span class="suffix" id="suffix"></span>
       <span class="dayword">DAY</span>
     </div>
-    <div id="remain">– 39 Days Remain –</div>
+    <div id="remain">Calculating time remaining…</div>
   </div>
   <div id="sub"><span>Until the D&amp;D campaign starts…</span></div>
 
@@ -351,11 +351,11 @@ canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-in
 
 <script>
 (() => {
-  // Midnight at the campaign date in Finland.
-  const TARGET = new Date("2026-10-16T00:00:00+03:00");
-  const DAY = 86400000;
   const root = document.documentElement;
   const frame = document.getElementById("frame");
+  // Read the campaign date from the page and derive every displayed value live.
+  const TARGET = new Date(frame.dataset.campaignStart);
+  const DAY = 86400000;
   const dayNum = document.getElementById("dayNum");
   const suffix = document.getElementById("suffix");
   const remain = document.getElementById("remain");
